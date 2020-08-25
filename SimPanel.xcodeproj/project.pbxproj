@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA34CA7D24F51E9200006358 /* FGConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA34CA7C24F51E9200006358 /* FGConnection.swift */; };
 		DAA18D2A24F2560C00BE3EA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18D2924F2560C00BE3EA8 /* AppDelegate.swift */; };
 		DAA18D2C24F2560D00BE3EA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA18D2B24F2560D00BE3EA8 /* SceneDelegate.swift */; };
 		DAA18D2F24F2560D00BE3EA8 /* SimPanel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAA18D2D24F2560D00BE3EA8 /* SimPanel.xcdatamodeld */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA34CA7C24F51E9200006358 /* FGConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FGConnection.swift; sourceTree = "<group>"; };
 		DAA18D2624F2560C00BE3EA8 /* SimPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA18D2924F2560C00BE3EA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAA18D2B24F2560D00BE3EA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				DAA18D3024F2560D00BE3EA8 /* ContentView.swift */,
 				DAA7F22F24F3914A0077EB0E /* MenuView.swift */,
 				DAA7F22D24F38BA30077EB0E /* FGPRC_logo_image.swift */,
+				DA34CA7C24F51E9200006358 /* FGConnection.swift */,
 				DAA18D3224F2560E00BE3EA8 /* Assets.xcassets */,
 				DAA18D3724F2560E00BE3EA8 /* LaunchScreen.storyboard */,
 				DAA18D3A24F2560E00BE3EA8 /* Info.plist */,
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAA7F22E24F38BA30077EB0E /* FGPRC_logo_image.swift in Sources */,
+				DA34CA7D24F51E9200006358 /* FGConnection.swift in Sources */,
 				DAA18D2F24F2560D00BE3EA8 /* SimPanel.xcdatamodeld in Sources */,
 				DAA18D2A24F2560C00BE3EA8 /* AppDelegate.swift in Sources */,
 				DAA7F23024F3914A0077EB0E /* MenuView.swift in Sources */,

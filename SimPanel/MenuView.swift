@@ -14,11 +14,12 @@ struct MenuView: View {
             Image("leather")
                 .resizable()
                 .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .edgesIgnoringSafeArea(.all)
             HStack {
-                Image("throttle")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 50)
+                ThrottleView()
+                    .padding(.leading, 5.0)
+                Spacer()
                 VStack {//Two Main Screens
                     HStack(spacing:0) {
                         MapScreen()
@@ -26,8 +27,11 @@ struct MenuView: View {
                     }
                     Spacer()
                 }
+                Spacer()
                 ThrottleView()
+                    .padding(.trailing, 5.0)
             }
+            .frame(maxWidth: 550)
             
         }
     }
@@ -47,13 +51,16 @@ struct MenuScreen: View {
                 .aspectRatio(contentMode: .fit)
             VStack() {
                 Text("SimPanel").foregroundColor(.green)
-                Text("————————").foregroundColor(.green)
+                MenuDivider()
                 Text("fuelplanner.com").foregroundColor(.green)
-                Text("————————").foregroundColor(.green)
+                MenuDivider()
+                Text("Settings").foregroundColor(.green)
+                MenuDivider()
                 Text("About").foregroundColor(.green)
             }
+            .frame(width: 200.0)
         }
-        .frame(width: 160, height: 160)
+        .frame(width: 200, height: 200)
     }
 }
 struct MapScreen: View {
@@ -68,7 +75,7 @@ struct MapScreen: View {
                 Spacer()
             }
         }
-        .frame(width: 160, height: 160)
+        .frame(width: 200, height: 200)
     }
 }
 
@@ -79,24 +86,32 @@ struct ThrottleView: View {
             Image("throttle")
                 .resizable()
                 .scaledToFill()
-                .frame(width: 50)
             VStack {
                 Text("\(self.throttleHandlePosition.height)")
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.white)
+                    .padding(.top,8)
                 Spacer()
-            }.padding(9)
+            }
+            //.padding(9)
             ThrottleHandle()
-                .offset(y:80)
-                .offset(y:self.throttleHandlePosition.height)
+                //.offset(y:80)
+                .offset(y:(self.throttleHandlePosition.height + 80))
                 .gesture(
                     DragGesture().onChanged{ value in
                         self.throttleHandlePosition = value.translation
+                        if(value.translation.height <= -100){
+                            self.throttleHandlePosition = .init(width: 0, height: -100)
+                        }
                     }
-                    
+                    .onEnded{ value in
+                        
+                    }
             )
         }
+        .frame(width: 80)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -106,11 +121,15 @@ struct ThrottleHandle: View {
             Image("throttle_handle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40)
             Image("throttle_handle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 40)
         }
+    }
+}
+
+struct MenuDivider: View {
+    var body: some View {
+        Text("———————").foregroundColor(.green).lineLimit(0).frame(width: 200.0, height: 10.0).scaledToFit()
     }
 }
