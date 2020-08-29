@@ -80,7 +80,7 @@ struct MapScreen: View {
 }
 
 struct ThrottleView: View {
-    //@EnvironmentObject var client:Client 
+    @EnvironmentObject var client:Client
     @State var throttleHandleCurrentPosition: CGPoint = .zero
     @State var throttleHandleNewPosition: CGPoint = .zero
     var body: some View {
@@ -114,11 +114,12 @@ struct ThrottleView: View {
                            self.throttleHandleCurrentPosition.y = 0
                         }
                         
-                        
+                        self.client.updateThrottleData(rawThrottleData: Float(self.throttleHandleCurrentPosition.y))
                     
                     }
                     .onEnded{ value in
                         self.throttleHandleNewPosition = self.throttleHandleCurrentPosition
+                        self.client.updateThrottleData(rawThrottleData: Float(self.throttleHandleCurrentPosition.y))
                     }
             )
         }
