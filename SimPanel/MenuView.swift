@@ -80,14 +80,15 @@ struct MapScreen: View {
 }
 
 struct ThrottleView: View {
-    @State var throttleHandlePosition: CGSize = .zero
+    @State var throttleHandleCurrentPosition: CGPoint = .zero
+    @State var throttleHandleNewPosition: CGPoint = .zero
     var body: some View {
         ZStack {
             Image("throttle")
                 .resizable()
                 .scaledToFill()
             VStack {
-                Text("\(self.throttleHandlePosition.height)")
+                Text("\(self.throttleHandleCurrentPosition.y)")
                     .font(.caption)
                     .fontWeight(.regular)
                     .foregroundColor(.white)
@@ -97,16 +98,24 @@ struct ThrottleView: View {
             //.padding(9)
             ThrottleHandle()
                 //.offset(y:80)
-                .offset(y:(self.throttleHandlePosition.height + 80))
+                .offset(y:(self.throttleHandleCurrentPosition.y + 80))
+                .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.1))
                 .gesture(
                     DragGesture().onChanged{ value in
-                        self.throttleHandlePosition = value.translation
-                        if(value.translation.height <= -100){
-                            self.throttleHandlePosition = .init(width: 0, height: -100)
+                        let translation = value.translation
+                        self.throttleHandleCurrentPosition.y = translation.height + self.throttleHandleNewPosition.y
+                        
+                        //Clipping the throttle handle
+                        if(self.throttleHandleCurrentPosition.y <= -200){
+                            self.throttleHandleCurrentPosition.y = -200
                         }
+                        if(self.throttleHandleCurrentPosition.y >= 0){
+                           self.throttleHandleCurrentPosition.y = 0
+                        }
+                    
                     }
                     .onEnded{ value in
-                        
+                        self.throttleHandleNewPosition = self.throttleHandleCurrentPosition
                     }
             )
         }
