@@ -44,21 +44,37 @@ struct MenuView_Previews: PreviewProvider {
 }
 
 struct MenuScreen: View {
+    init(){
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().isHidden = true
+    }
     var body: some View {
         ZStack {
             Image("main_screen")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            VStack() {
-                Text("SimPanel").foregroundColor(.green)
-                MenuDivider()
-                Text("fuelplanner.com").foregroundColor(.green)
-                MenuDivider()
-                Text("Settings").foregroundColor(.green)
-                MenuDivider()
-                Text("About").foregroundColor(.green)
+            NavigationView{
+                VStack() {
+                    Text("SimPanel").foregroundColor(.green)
+                    MenuDivider()
+                    Text("fuelplanner.com").foregroundColor(.green)
+                    MenuDivider()
+                    Text("Settings").foregroundColor(.green)
+                    MenuDivider()
+                    Text("About")
+                        .foregroundColor(.green)
+                        .onTapGesture() {
+                            print("About page should appear")
+                    }
+                }
+                .frame(width: 200.0)
             }
-            .frame(width: 200.0)
+            
+            
         }
         .frame(width: 200, height: 200)
     }
