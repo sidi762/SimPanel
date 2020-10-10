@@ -117,7 +117,7 @@ struct ThrottleView: View {
             ThrottleHandle()
                 //.offset(y:80)
                 .offset(y:(self.throttleHandleCurrentPosition.y + 80))
-                .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.1))
+                .animation(.spring(response: 0.2, dampingFraction: 0.8, blendDuration: 0.1))
                 .gesture(
                     DragGesture().onChanged{ value in
                         let translation = value.translation
@@ -139,6 +139,14 @@ struct ThrottleView: View {
                         self.client.updateThrottleData(rawThrottleData: Float(self.throttleHandleCurrentPosition.y))
                     }
             )
+            VStack {
+                Spacer()
+                Image("Rev")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50.0)
+                    .padding(.bottom, 7.0)
+            }
         }
         .frame(width: 80)
         .edgesIgnoringSafeArea(.bottom)
@@ -174,13 +182,13 @@ struct LeftView: View {
             Image("info_block")
                 .resizable()
                 .scaledToFit()
-            Image("info_block")
+            Image("left_screen")
                 .resizable()
                 .scaledToFit()
-            Image("info_block")
+            Image("left_screen")
                 .resizable()
                 .scaledToFit()
-            Image("info_block")
+            Image("left_screen")
                 .resizable()
                 .scaledToFit()
         }
