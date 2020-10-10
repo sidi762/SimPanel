@@ -17,8 +17,9 @@ struct MenuView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .edgesIgnoringSafeArea(.all)
             HStack {
-                ThrottleView()
+                LeftView()
                     .padding(.leading, 5.0)
+                    .frame(width: 80)
                 Spacer()
                 VStack {//Two Main Screens
                     HStack(spacing:0) {
@@ -33,6 +34,12 @@ struct MenuView: View {
             }
             .frame(maxWidth: 550)
             
+//            AboutView()
+//                .aspectRatio(contentMode: .fit)
+//                .background(Color.white)
+//                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                
+            
         }
     }
 }
@@ -44,36 +51,30 @@ struct MenuView_Previews: PreviewProvider {
 }
 
 struct MenuScreen: View {
-    init(){
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().barTintColor = .clear
-        UINavigationBar.appearance().backgroundColor = .clear
-        UINavigationBar.appearance().isHidden = true
-    }
+    @State var showAboutPage: Bool = false
     var body: some View {
         ZStack {
             Image("main_screen")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            NavigationView{
-                VStack() {
-                    Text("SimPanel").foregroundColor(.green)
-                    MenuDivider()
-                    Text("fuelplanner.com").foregroundColor(.green)
-                    MenuDivider()
-                    Text("Settings").foregroundColor(.green)
-                    MenuDivider()
-                    Text("About")
-                        .foregroundColor(.green)
-                        .onTapGesture() {
-                            print("About page should appear")
+            VStack() {
+                Text("SimPanel").foregroundColor(.green)
+                MenuDivider()
+                Text("fuelplanner.com").foregroundColor(.green)
+                MenuDivider()
+                Text("Settings").foregroundColor(.green)
+                MenuDivider()
+                Text("About")
+                    .foregroundColor(.green)
+                    .onTapGesture() {
+                        print("About page should appear")
+                        self.showAboutPage = true
                     }
-                }
-                .frame(width: 200.0)
+                    .sheet(isPresented: $showAboutPage, content: {
+                        AboutView(showAboutPage: self.$showAboutPage)
+                    })
             }
-            
+            .frame(width: 200.0)
             
         }
         .frame(width: 200, height: 200)
@@ -159,6 +160,29 @@ struct ThrottleHandle: View {
 
 struct MenuDivider: View {
     var body: some View {
-        Text("———————").foregroundColor(.green).lineLimit(0).frame(width: 200.0, height: 10.0).scaledToFit()
+        Text("────────") //Box Drawings Light Horizontal, U+2500
+            .font(.body)
+            .foregroundColor(.green)
+            .lineLimit(0)
+            .frame(width: 200.0, height: 10.0).scaledToFit()
+    }
+}
+
+struct LeftView: View {
+    var body: some View {
+        VStack(spacing:0) {
+            Image("info_block")
+                .resizable()
+                .scaledToFit()
+            Image("info_block")
+                .resizable()
+                .scaledToFit()
+            Image("info_block")
+                .resizable()
+                .scaledToFit()
+            Image("info_block")
+                .resizable()
+                .scaledToFit()
+        }
     }
 }
